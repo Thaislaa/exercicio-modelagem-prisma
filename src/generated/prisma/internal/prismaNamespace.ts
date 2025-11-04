@@ -391,7 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Projeto: 'Projeto',
   Tarefa: 'Tarefa',
-  Usuario: 'Usuario'
+  Usuario: 'Usuario',
+  UsuarioProjeto: 'UsuarioProjeto'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "projeto" | "tarefa" | "usuario"
+    modelProps: "projeto" | "tarefa" | "usuario" | "usuarioProjeto"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -633,6 +634,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UsuarioProjeto: {
+      payload: Prisma.$UsuarioProjetoPayload<ExtArgs>
+      fields: Prisma.UsuarioProjetoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UsuarioProjetoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UsuarioProjetoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        findFirst: {
+          args: Prisma.UsuarioProjetoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UsuarioProjetoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        findMany: {
+          args: Prisma.UsuarioProjetoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>[]
+        }
+        create: {
+          args: Prisma.UsuarioProjetoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        createMany: {
+          args: Prisma.UsuarioProjetoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UsuarioProjetoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>[]
+        }
+        delete: {
+          args: Prisma.UsuarioProjetoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        update: {
+          args: Prisma.UsuarioProjetoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        deleteMany: {
+          args: Prisma.UsuarioProjetoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UsuarioProjetoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UsuarioProjetoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>[]
+        }
+        upsert: {
+          args: Prisma.UsuarioProjetoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UsuarioProjetoPayload>
+        }
+        aggregate: {
+          args: Prisma.UsuarioProjetoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUsuarioProjeto>
+        }
+        groupBy: {
+          args: Prisma.UsuarioProjetoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UsuarioProjetoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UsuarioProjetoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UsuarioProjetoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -689,6 +764,7 @@ export const TarefaScalarFieldEnum = {
   titulo: 'titulo',
   descricao: 'descricao',
   urgente: 'urgente',
+  idProjeto: 'idProjeto',
   dtCriacao: 'dtCriacao',
   dtAtualizacao: 'dtAtualizacao'
 } as const
@@ -707,6 +783,14 @@ export const UsuarioScalarFieldEnum = {
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
+
+
+export const UsuarioProjetoScalarFieldEnum = {
+  idUsuario: 'idUsuario',
+  idProjeto: 'idProjeto'
+} as const
+
+export type UsuarioProjetoScalarFieldEnum = (typeof UsuarioProjetoScalarFieldEnum)[keyof typeof UsuarioProjetoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -877,6 +961,7 @@ export type GlobalOmitConfig = {
   projeto?: Prisma.ProjetoOmit
   tarefa?: Prisma.TarefaOmit
   usuario?: Prisma.UsuarioOmit
+  usuarioProjeto?: Prisma.UsuarioProjetoOmit
 }
 
 /* Types for Logging */

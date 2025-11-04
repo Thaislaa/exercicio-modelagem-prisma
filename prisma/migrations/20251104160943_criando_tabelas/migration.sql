@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "projeto" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "titulo" VARCHAR(100) NOT NULL,
     "descricao" TEXT NOT NULL,
     "prazoConclusao" DATE,
@@ -12,7 +12,7 @@ CREATE TABLE "projeto" (
 
 -- CreateTable
 CREATE TABLE "tarefa" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "titulo" VARCHAR(100) NOT NULL,
     "descricao" TEXT NOT NULL,
     "urgente" BOOLEAN NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE "tarefa" (
 
 -- CreateTable
 CREATE TABLE "usuario" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL,
     "nome" VARCHAR(100) NOT NULL,
     "email" VARCHAR(120) NOT NULL,
     "senha" VARCHAR(100) NOT NULL,

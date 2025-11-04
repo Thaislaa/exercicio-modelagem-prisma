@@ -10,4 +10,5 @@
 export type * from './models/Projeto.js'
 export type * from './models/Tarefa.js'
 export type * from './models/Usuario.js'
+export type * from './models/UsuarioProjeto.js'
 export type * from './commonInputTypes.js'

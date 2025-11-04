@@ -183,12 +183,14 @@ export type ProjetoWhereInput = {
   AND?: Prisma.ProjetoWhereInput | Prisma.ProjetoWhereInput[]
   OR?: Prisma.ProjetoWhereInput[]
   NOT?: Prisma.ProjetoWhereInput | Prisma.ProjetoWhereInput[]
-  id?: Prisma.StringFilter<"Projeto"> | string
+  id?: Prisma.UuidFilter<"Projeto"> | string
   titulo?: Prisma.StringFilter<"Projeto"> | string
   descricao?: Prisma.StringFilter<"Projeto"> | string
   prazoConclusao?: Prisma.DateTimeNullableFilter<"Projeto"> | Date | string | null
   dtCriacao?: Prisma.DateTimeFilter<"Projeto"> | Date | string
   dtAtualizacao?: Prisma.DateTimeFilter<"Projeto"> | Date | string
+  tarefas?: Prisma.TarefaListRelationFilter
+  projetoUsuarios?: Prisma.UsuarioProjetoListRelationFilter
 }
 
 export type ProjetoOrderByWithRelationInput = {
@@ -198,6 +200,8 @@ export type ProjetoOrderByWithRelationInput = {
   prazoConclusao?: Prisma.SortOrderInput | Prisma.SortOrder
   dtCriacao?: Prisma.SortOrder
   dtAtualizacao?: Prisma.SortOrder
+  tarefas?: Prisma.TarefaOrderByRelationAggregateInput
+  projetoUsuarios?: Prisma.UsuarioProjetoOrderByRelationAggregateInput
 }
 
 export type ProjetoWhereUniqueInput = Prisma.AtLeast<{
@@ -210,6 +214,8 @@ export type ProjetoWhereUniqueInput = Prisma.AtLeast<{
   prazoConclusao?: Prisma.DateTimeNullableFilter<"Projeto"> | Date | string | null
   dtCriacao?: Prisma.DateTimeFilter<"Projeto"> | Date | string
   dtAtualizacao?: Prisma.DateTimeFilter<"Projeto"> | Date | string
+  tarefas?: Prisma.TarefaListRelationFilter
+  projetoUsuarios?: Prisma.UsuarioProjetoListRelationFilter
 }, "id">
 
 export type ProjetoOrderByWithAggregationInput = {
@@ -228,7 +234,7 @@ export type ProjetoScalarWhereWithAggregatesInput = {
   AND?: Prisma.ProjetoScalarWhereWithAggregatesInput | Prisma.ProjetoScalarWhereWithAggregatesInput[]
   OR?: Prisma.ProjetoScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProjetoScalarWhereWithAggregatesInput | Prisma.ProjetoScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Projeto"> | string
+  id?: Prisma.UuidWithAggregatesFilter<"Projeto"> | string
   titulo?: Prisma.StringWithAggregatesFilter<"Projeto"> | string
   descricao?: Prisma.StringWithAggregatesFilter<"Projeto"> | string
   prazoConclusao?: Prisma.DateTimeNullableWithAggregatesFilter<"Projeto"> | Date | string | null
@@ -243,6 +249,8 @@ export type ProjetoCreateInput = {
   prazoConclusao?: Date | string | null
   dtCriacao?: Date | string
   dtAtualizacao?: Date | string
+  tarefas?: Prisma.TarefaCreateNestedManyWithoutProjetoInput
+  projetoUsuarios?: Prisma.UsuarioProjetoCreateNestedManyWithoutProjetoInput
 }
 
 export type ProjetoUncheckedCreateInput = {
@@ -252,6 +260,8 @@ export type ProjetoUncheckedCreateInput = {
   prazoConclusao?: Date | string | null
   dtCriacao?: Date | string
   dtAtualizacao?: Date | string
+  tarefas?: Prisma.TarefaUncheckedCreateNestedManyWithoutProjetoInput
+  projetoUsuarios?: Prisma.UsuarioProjetoUncheckedCreateNestedManyWithoutProjetoInput
 }
 
 export type ProjetoUpdateInput = {
@@ -261,6 +271,8 @@ export type ProjetoUpdateInput = {
   prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tarefas?: Prisma.TarefaUpdateManyWithoutProjetoNestedInput
+  projetoUsuarios?: Prisma.UsuarioProjetoUpdateManyWithoutProjetoNestedInput
 }
 
 export type ProjetoUncheckedUpdateInput = {
@@ -270,6 +282,8 @@ export type ProjetoUncheckedUpdateInput = {
   prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tarefas?: Prisma.TarefaUncheckedUpdateManyWithoutProjetoNestedInput
+  projetoUsuarios?: Prisma.UsuarioProjetoUncheckedUpdateManyWithoutProjetoNestedInput
 }
 
 export type ProjetoCreateManyInput = {
@@ -326,6 +340,11 @@ export type ProjetoMinOrderByAggregateInput = {
   dtAtualizacao?: Prisma.SortOrder
 }
 
+export type ProjetoScalarRelationFilter = {
+  is?: Prisma.ProjetoWhereInput
+  isNot?: Prisma.ProjetoWhereInput
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -338,6 +357,184 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type ProjetoCreateNestedOneWithoutTarefasInput = {
+  create?: Prisma.XOR<Prisma.ProjetoCreateWithoutTarefasInput, Prisma.ProjetoUncheckedCreateWithoutTarefasInput>
+  connectOrCreate?: Prisma.ProjetoCreateOrConnectWithoutTarefasInput
+  connect?: Prisma.ProjetoWhereUniqueInput
+}
+
+export type ProjetoUpdateOneRequiredWithoutTarefasNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjetoCreateWithoutTarefasInput, Prisma.ProjetoUncheckedCreateWithoutTarefasInput>
+  connectOrCreate?: Prisma.ProjetoCreateOrConnectWithoutTarefasInput
+  upsert?: Prisma.ProjetoUpsertWithoutTarefasInput
+  connect?: Prisma.ProjetoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjetoUpdateToOneWithWhereWithoutTarefasInput, Prisma.ProjetoUpdateWithoutTarefasInput>, Prisma.ProjetoUncheckedUpdateWithoutTarefasInput>
+}
+
+export type ProjetoCreateNestedOneWithoutProjetoUsuariosInput = {
+  create?: Prisma.XOR<Prisma.ProjetoCreateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedCreateWithoutProjetoUsuariosInput>
+  connectOrCreate?: Prisma.ProjetoCreateOrConnectWithoutProjetoUsuariosInput
+  connect?: Prisma.ProjetoWhereUniqueInput
+}
+
+export type ProjetoUpdateOneRequiredWithoutProjetoUsuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjetoCreateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedCreateWithoutProjetoUsuariosInput>
+  connectOrCreate?: Prisma.ProjetoCreateOrConnectWithoutProjetoUsuariosInput
+  upsert?: Prisma.ProjetoUpsertWithoutProjetoUsuariosInput
+  connect?: Prisma.ProjetoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjetoUpdateToOneWithWhereWithoutProjetoUsuariosInput, Prisma.ProjetoUpdateWithoutProjetoUsuariosInput>, Prisma.ProjetoUncheckedUpdateWithoutProjetoUsuariosInput>
+}
+
+export type ProjetoCreateWithoutTarefasInput = {
+  id?: string
+  titulo: string
+  descricao: string
+  prazoConclusao?: Date | string | null
+  dtCriacao?: Date | string
+  dtAtualizacao?: Date | string
+  projetoUsuarios?: Prisma.UsuarioProjetoCreateNestedManyWithoutProjetoInput
+}
+
+export type ProjetoUncheckedCreateWithoutTarefasInput = {
+  id?: string
+  titulo: string
+  descricao: string
+  prazoConclusao?: Date | string | null
+  dtCriacao?: Date | string
+  dtAtualizacao?: Date | string
+  projetoUsuarios?: Prisma.UsuarioProjetoUncheckedCreateNestedManyWithoutProjetoInput
+}
+
+export type ProjetoCreateOrConnectWithoutTarefasInput = {
+  where: Prisma.ProjetoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjetoCreateWithoutTarefasInput, Prisma.ProjetoUncheckedCreateWithoutTarefasInput>
+}
+
+export type ProjetoUpsertWithoutTarefasInput = {
+  update: Prisma.XOR<Prisma.ProjetoUpdateWithoutTarefasInput, Prisma.ProjetoUncheckedUpdateWithoutTarefasInput>
+  create: Prisma.XOR<Prisma.ProjetoCreateWithoutTarefasInput, Prisma.ProjetoUncheckedCreateWithoutTarefasInput>
+  where?: Prisma.ProjetoWhereInput
+}
+
+export type ProjetoUpdateToOneWithWhereWithoutTarefasInput = {
+  where?: Prisma.ProjetoWhereInput
+  data: Prisma.XOR<Prisma.ProjetoUpdateWithoutTarefasInput, Prisma.ProjetoUncheckedUpdateWithoutTarefasInput>
+}
+
+export type ProjetoUpdateWithoutTarefasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetoUsuarios?: Prisma.UsuarioProjetoUpdateManyWithoutProjetoNestedInput
+}
+
+export type ProjetoUncheckedUpdateWithoutTarefasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetoUsuarios?: Prisma.UsuarioProjetoUncheckedUpdateManyWithoutProjetoNestedInput
+}
+
+export type ProjetoCreateWithoutProjetoUsuariosInput = {
+  id?: string
+  titulo: string
+  descricao: string
+  prazoConclusao?: Date | string | null
+  dtCriacao?: Date | string
+  dtAtualizacao?: Date | string
+  tarefas?: Prisma.TarefaCreateNestedManyWithoutProjetoInput
+}
+
+export type ProjetoUncheckedCreateWithoutProjetoUsuariosInput = {
+  id?: string
+  titulo: string
+  descricao: string
+  prazoConclusao?: Date | string | null
+  dtCriacao?: Date | string
+  dtAtualizacao?: Date | string
+  tarefas?: Prisma.TarefaUncheckedCreateNestedManyWithoutProjetoInput
+}
+
+export type ProjetoCreateOrConnectWithoutProjetoUsuariosInput = {
+  where: Prisma.ProjetoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjetoCreateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedCreateWithoutProjetoUsuariosInput>
+}
+
+export type ProjetoUpsertWithoutProjetoUsuariosInput = {
+  update: Prisma.XOR<Prisma.ProjetoUpdateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedUpdateWithoutProjetoUsuariosInput>
+  create: Prisma.XOR<Prisma.ProjetoCreateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedCreateWithoutProjetoUsuariosInput>
+  where?: Prisma.ProjetoWhereInput
+}
+
+export type ProjetoUpdateToOneWithWhereWithoutProjetoUsuariosInput = {
+  where?: Prisma.ProjetoWhereInput
+  data: Prisma.XOR<Prisma.ProjetoUpdateWithoutProjetoUsuariosInput, Prisma.ProjetoUncheckedUpdateWithoutProjetoUsuariosInput>
+}
+
+export type ProjetoUpdateWithoutProjetoUsuariosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tarefas?: Prisma.TarefaUpdateManyWithoutProjetoNestedInput
+}
+
+export type ProjetoUncheckedUpdateWithoutProjetoUsuariosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  prazoConclusao?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dtCriacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dtAtualizacao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tarefas?: Prisma.TarefaUncheckedUpdateManyWithoutProjetoNestedInput
+}
+
+
+/**
+ * Count Type ProjetoCountOutputType
+ */
+
+export type ProjetoCountOutputType = {
+  tarefas: number
+  projetoUsuarios: number
+}
+
+export type ProjetoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tarefas?: boolean | ProjetoCountOutputTypeCountTarefasArgs
+  projetoUsuarios?: boolean | ProjetoCountOutputTypeCountProjetoUsuariosArgs
+}
+
+/**
+ * ProjetoCountOutputType without action
+ */
+export type ProjetoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjetoCountOutputType
+   */
+  select?: Prisma.ProjetoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjetoCountOutputType without action
+ */
+export type ProjetoCountOutputTypeCountTarefasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TarefaWhereInput
+}
+
+/**
+ * ProjetoCountOutputType without action
+ */
+export type ProjetoCountOutputTypeCountProjetoUsuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UsuarioProjetoWhereInput
+}
 
 
 export type ProjetoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -347,6 +544,9 @@ export type ProjetoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   prazoConclusao?: boolean
   dtCriacao?: boolean
   dtAtualizacao?: boolean
+  tarefas?: boolean | Prisma.Projeto$tarefasArgs<ExtArgs>
+  projetoUsuarios?: boolean | Prisma.Projeto$projetoUsuariosArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjetoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projeto"]>
 
 export type ProjetoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -377,10 +577,20 @@ export type ProjetoSelectScalar = {
 }
 
 export type ProjetoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "prazoConclusao" | "dtCriacao" | "dtAtualizacao", ExtArgs["result"]["projeto"]>
+export type ProjetoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tarefas?: boolean | Prisma.Projeto$tarefasArgs<ExtArgs>
+  projetoUsuarios?: boolean | Prisma.Projeto$projetoUsuariosArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjetoCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ProjetoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ProjetoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ProjetoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Projeto"
-  objects: {}
+  objects: {
+    tarefas: Prisma.$TarefaPayload<ExtArgs>[]
+    projetoUsuarios: Prisma.$UsuarioProjetoPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     titulo: string
@@ -782,6 +992,8 @@ readonly fields: ProjetoFieldRefs;
  */
 export interface Prisma__ProjetoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tarefas<T extends Prisma.Projeto$tarefasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Projeto$tarefasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TarefaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projetoUsuarios<T extends Prisma.Projeto$projetoUsuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Projeto$projetoUsuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsuarioProjetoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -834,6 +1046,10 @@ export type ProjetoFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * Filter, which Projeto to fetch.
    */
   where: Prisma.ProjetoWhereUniqueInput
@@ -852,6 +1068,10 @@ export type ProjetoFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * Filter, which Projeto to fetch.
    */
   where: Prisma.ProjetoWhereUniqueInput
@@ -869,6 +1089,10 @@ export type ProjetoFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Projeto
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
   /**
    * Filter, which Projeto to fetch.
    */
@@ -918,6 +1142,10 @@ export type ProjetoFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * Filter, which Projeto to fetch.
    */
   where?: Prisma.ProjetoWhereInput
@@ -966,6 +1194,10 @@ export type ProjetoFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * Filter, which Projetos to fetch.
    */
   where?: Prisma.ProjetoWhereInput
@@ -1008,6 +1240,10 @@ export type ProjetoCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Projeto
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
   /**
    * The data needed to create a Projeto.
    */
@@ -1056,6 +1292,10 @@ export type ProjetoUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Projeto
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
   /**
    * The data needed to update a Projeto.
    */
@@ -1123,6 +1363,10 @@ export type ProjetoUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * The filter to search for the Projeto to update in case it exists.
    */
   where: Prisma.ProjetoWhereUniqueInput
@@ -1149,6 +1393,10 @@ export type ProjetoDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
+  /**
    * Filter which Projeto to delete.
    */
   where: Prisma.ProjetoWhereUniqueInput
@@ -1169,6 +1417,54 @@ export type ProjetoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Projeto.tarefas
+ */
+export type Projeto$tarefasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tarefa
+   */
+  select?: Prisma.TarefaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tarefa
+   */
+  omit?: Prisma.TarefaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TarefaInclude<ExtArgs> | null
+  where?: Prisma.TarefaWhereInput
+  orderBy?: Prisma.TarefaOrderByWithRelationInput | Prisma.TarefaOrderByWithRelationInput[]
+  cursor?: Prisma.TarefaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TarefaScalarFieldEnum | Prisma.TarefaScalarFieldEnum[]
+}
+
+/**
+ * Projeto.projetoUsuarios
+ */
+export type Projeto$projetoUsuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UsuarioProjeto
+   */
+  select?: Prisma.UsuarioProjetoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UsuarioProjeto
+   */
+  omit?: Prisma.UsuarioProjetoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UsuarioProjetoInclude<ExtArgs> | null
+  where?: Prisma.UsuarioProjetoWhereInput
+  orderBy?: Prisma.UsuarioProjetoOrderByWithRelationInput | Prisma.UsuarioProjetoOrderByWithRelationInput[]
+  cursor?: Prisma.UsuarioProjetoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UsuarioProjetoScalarFieldEnum | Prisma.UsuarioProjetoScalarFieldEnum[]
+}
+
+/**
  * Projeto without action
  */
 export type ProjetoDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1180,4 +1476,8 @@ export type ProjetoDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Projeto
    */
   omit?: Prisma.ProjetoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjetoInclude<ExtArgs> | null
 }

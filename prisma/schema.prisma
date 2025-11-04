@@ -15,32 +15,46 @@ datasource db {
 }
 
 model Projeto{
-  id String @id @default(uuid())
+  id String @id @db.Uuid @default(uuid())
   titulo String @db.VarChar(100)
   descricao String
-  prazoConclusao DateTime? @db.Date 
+  prazoConclusao DateTime? @db.Date @map("prazo_conclusao")
+  tarefas Tarefa[]  
+  projetoUsuarios UsuarioProjeto[]
   dtCriacao DateTime @default(now()) @map("dt_criacao")
   dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
   @@map("projeto")
 }
 
 model Tarefa{
-  id String @id @default(uuid())
+  id String @id @db.Uuid @default(uuid())
   titulo String @db.VarChar(100)
   descricao String
-  urgente Boolean
+  urgente Boolean @default(false)
+  idProjeto String @db.Uuid @map("id_projeto")
+  projeto Projeto @relation(fields: [idProjeto], references: [id])
   dtCriacao DateTime @default(now()) @map("dt_criacao")
   dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
   @@map("tarefa")
 }
 
 model Usuario{
-  id String @id @default(uuid())
+  id String @id @db.Uuid @default(uuid())
   nome String @db.VarChar(100)
   email String @unique @db.VarChar(120)
   senha String @db.VarChar(100)
   telefone String @db.VarChar(20)
+  usuarioProjetos UsuarioProjeto[] 
   dtCriacao DateTime @default(now()) @map("dt_criacao")
   dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
   @@map("usuario")
+}
+
+model UsuarioProjeto{
+  idUsuario String @db.Uuid @map("id_usuario")
+  idProjeto String @db.Uuid @map("id_projeto")
+  usuario Usuario @relation(fields: [idUsuario], references: [id])
+  projeto Projeto @relation(fields: [idProjeto], references: [id])
+  @@id([idUsuario, idProjeto])
+  @@map("usuario_projeto")
 }
