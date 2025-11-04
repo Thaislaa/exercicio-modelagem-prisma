@@ -1,0 +1,10 @@
+Exercício
+
+Você está desenvolvendo um sistema de gerenciamento de projetos. 
+Cada projeto pode ter várias tarefas associadas a ele e pode ser compartilhado entre vários usuários. 
+Uma tarefa só pode ser associada a um único projeto. Um usuário pode participar de múltiplos projetos.
+
+Regras:
+- Todas as tabelas devem conter um identificador único do tipo UUID.
+- Não pode existir mais de um usuário com o mesmo e-mail.
+- O projeto deve ter um título, descrição e de forma opcional um prazo de conclusão.
