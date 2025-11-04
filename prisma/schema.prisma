@@ -13,3 +13,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Projeto{
+  id String @id @default(uuid())
+  titulo String @db.VarChar(100)
+  descricao String
+  prazoConclusao DateTime? @db.Date 
+  dtCriacao DateTime @default(now()) @map("dt_criacao")
+  dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
+  @@map("projeto")
+}
+
+model Tarefa{
+  id String @id @default(uuid())
+  titulo String @db.VarChar(100)
+  descricao String
+  urgente Boolean
+  dtCriacao DateTime @default(now()) @map("dt_criacao")
+  dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
+  @@map("tarefa")
+}
+
+model Usuario{
+  id String @id @default(uuid())
+  nome String @db.VarChar(100)
+  email String @unique @db.VarChar(120)
+  senha String @db.VarChar(100)
+  telefone String @db.VarChar(20)
+  dtCriacao DateTime @default(now()) @map("dt_criacao")
+  dtAtualizacao DateTime @updatedAt @map("dt_atualizacao")
+  @@map("usuario")
+}
